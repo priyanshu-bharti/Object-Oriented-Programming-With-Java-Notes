@@ -1,11 +1,11 @@
 # Object Oriented Programming With Java (ITA5004) - Notes
 # Module - 1
-- [x] Classes and Objects
-- [x] Overloading Methods
-- [x] Passing and Receiving Objects
-- [x] Controlling access to member functions and methods
-- [x] Static and Final Keywords
-- [x] String handling
+- [x] ~~Classes and Objects~~
+- [x] ~~Overloading Methods~~
+- [x] ~~Passing and Receiving Objects~~
+- [x] ~~Controlling access to member functions and methods~~
+- [x] ~~Static and Final Keywords~~
+- [x] ~~String handling~~
 
 ## Classes And Objects
 * Mechanism to achieve abstraction
