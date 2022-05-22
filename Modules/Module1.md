@@ -190,7 +190,7 @@ public class Main {
 // you also need to pass the parameters.
 ```
 
-## Final Keyword
+## `final` Keyword
 * It is used to restrict the user
 * Final could be used on:
 	* **Variable** - To make a variable constant.
