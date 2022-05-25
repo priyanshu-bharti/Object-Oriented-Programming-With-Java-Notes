@@ -67,17 +67,15 @@ class ExceptionExample {
 
 ### Built-In Exception
 
-1. **ArithmeticException** :
-1. **ArrayIndexOutOfBoundsException** :
-1. **StringIndexOutOfBoundsException** :
-1. **NumberFormatException** :
-1. **NoSuchClassException** :
-1. **NoSuchMethodException** :
-1. **NoSuchFieldException** :
-1. **RuntimeException** :
-1. **InterruptedException** :
-1. **IOException** :
-1. **DivideByZeroException** :
+1. **ArithmeticException** : Arithmetic error, such as divide-by-zero.
+1. **ArrayIndexOutOfBoundsException** : Array index is out-of-bounds.
+1. **StringIndexOutOfBoundsException** : Attempt to index outside the bounds of a string.
+1. **NumberFormatException** : Invalid conversion of a string to a numeric format.
+1. **ClassNotFoundException** : Class not found.
+1. **NoSuchMethodException** : A requested method does not exist.
+1. **NoSuchFieldException** : A requested field does not exist.
+1. **InterruptedException** : A thread has been interrupted
+1. **IOException** : I/O Operation has failed.
 
 ### User-Defined Exceptions
 
