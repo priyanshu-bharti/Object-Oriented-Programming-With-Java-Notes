@@ -1,55 +1,40 @@
-
 // Import this to perform event handling
 import java.awt.event.*;
 import java.awt.*;
 import java.applet.*;
 
-/*<applet code="MyApplet" width=200 height=200></applet>*/
+/*<applet code="MyApplet" width=300 height=200></applet>*/
 
-// Make sure to implement ActionListener
+// Make sure to implement ItemListener
 public class MyApplet extends Applet implements ActionListener {
-  // Message to Print
   String message = "";
-  // Declare buttons
-  Button yes, no, maybe;
+  Label labelName, labelPass;
+  TextField name, pass;
 
   public void init() {
-    // Create buttons
-    yes = new Button("Yes");
-    no = new Button("No");
-    maybe = new Button("Maybe");
+    this.labelName = new Label("Name : ", Label.RIGHT);
+    this.labelPass = new Label("Password : ", Label.RIGHT);
 
-    // Add the button to the window
-    add(yes);
-    add(no);
-    add(maybe);
+    name = new TextField(10);
+    pass = new TextField(10);
+    pass.setEchoChar('*');
 
-    // Add action listener to the buttons 
-    yes.addActionListener(this);
-    no.addActionListener(this);
-    maybe.addActionListener(this);
+    add(labelName);
+    add(name);
+    add(labelPass);
+    add(pass);
+
+    name.addActionListener(this);
+    pass.addActionListener(this);
   }
 
-  // perform action
   public void actionPerformed(ActionEvent evt) {
-    // Get the Button labels
-    String str = evt.getActionCommand();
-
-    // Change the message according to the kind of button pressed
-    if (str.equals("Yes")) {
-      this.message = "You Pressed Yes";
-    } else if (str.equals("No")) {
-      this.message = "You Pressed No";
-    } else {
-      this.message = "You Pressed Maybe";
-    }
-
-    // Repaint the window
     repaint();
   }
 
-  // Draw the string on repaint
   public void paint(Graphics g) {
-    g.drawString(message, 20, 100);
+    g.drawString("Name : " + name.getText(), 20, 100);
+    g.drawString("Selected Text in Name : " + name.getSelectedText(), 20, 120);
+    g.drawString("Password : " + pass.getText(), 20, 140);
   }
 }

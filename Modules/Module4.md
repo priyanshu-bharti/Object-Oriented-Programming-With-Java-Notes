@@ -283,8 +283,9 @@ public class MyApplet extends Applet implements Runnable {
 
 ### Changing Text Based on Button Press
 
-```java
+When working with button remember to use **`ActionListener`** Interface
 
+```java
 // Import this to perform event handling
 import java.awt.event.*;
 import java.awt.*;
@@ -341,8 +342,338 @@ public class MyApplet extends Applet implements ActionListener {
 }
 ```
 
-## AWT Programming
+### Changing String Labels according to the Checkbox
 
-## Event Handling
+When working with a checkbox group, make sure to use **`ItemListener`** Interface.
+
+```java
+// Import this to perform event handling
+import java.awt.event.*;
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code="MyApplet" width=300 height=200></applet>*/
+
+// Make sure to implement ItemListener
+public class MyApplet extends Applet implements ItemListener {
+  // Message to Print
+  String message = "";
+  // Declare checkboxes
+  Checkbox windows11, archLinux, macOS, freeBSD;
+  CheckboxGroup checkboxGroup;
+
+  public void init() {
+    // Instantiate a new checkbox group
+    this.checkboxGroup = new CheckboxGroup();
+
+    // Create checkbox objects
+    macOS = new Checkbox("macOS 12 Monterey", checkboxGroup, true);
+    archLinux = new Checkbox("Arch Linux", checkboxGroup, false);
+    windows11 = new Checkbox("Windows 11", checkboxGroup, false);
+    freeBSD = new Checkbox("Free BSD", checkboxGroup, false);
+
+    // Add the checkboxes to the window
+    add(macOS);
+    add(archLinux);
+    add(windows11);
+    add(freeBSD);
+
+    // Add action listener to the buttons
+    macOS.addItemListener(this);
+    archLinux.addItemListener(this);
+    windows11.addItemListener(this);
+    freeBSD.addItemListener(this);
+  }
+
+  // repaint the screen when checkbox state changes
+  public void itemStateChanged(ItemEvent evt) {
+    repaint();
+  }
+
+  // Draw the string on repaint
+  public void paint(Graphics g) {
+    this.message = "Current Selection : " + this.checkboxGroup.getSelectedCheckbox().getLabel();
+    g.drawString(message, 20, 100);
+  }
+}
+```
+
+### Printing Checkbox State without using a Checkbox Group
+
+```java
+// Import this to perform event handling
+import java.awt.event.*;
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code="MyApplet" width=300 height=200></applet>*/
+
+// Make sure to implement ItemListener
+public class MyApplet extends Applet implements ItemListener {
+  // Message to Print
+  String message = "";
+  // Declare checkboxes
+  Checkbox windows11, archLinux, macOS, freeBSD;
+
+  public void init() {
+    // Create checkbox objects
+    macOS = new Checkbox("macOS 12 Monterey", null, true);
+    archLinux = new Checkbox("Arch Linux", null, false);
+    windows11 = new Checkbox("Windows 11", null, false);
+    freeBSD = new Checkbox("Free BSD", null, false);
+
+    // Add the checkboxes to the window
+    add(macOS);
+    add(archLinux);
+    add(windows11);
+    add(freeBSD);
+
+    // Add action listener to the buttons
+    macOS.addItemListener(this);
+    archLinux.addItemListener(this);
+    windows11.addItemListener(this);
+    freeBSD.addItemListener(this);
+  }
+
+  // repaint the screen when checkbox state changes
+  public void itemStateChanged(ItemEvent evt) {
+    repaint();
+  }
+
+  // Draw the string on repaint
+  public void paint(Graphics g) {
+    this.message = "Your OS of Choice : ";
+    g.drawString(message, 20, 100);
+    this.message = "macOS 12 Monterey : " + macOS.getState();
+    g.drawString(message, 20, 120);
+    this.message = "Arch Linux : " + archLinux.getState();
+    g.drawString(message, 20, 140);
+    this.message = "Windows 11 : " + windows11.getState();
+    g.drawString(message, 20, 160);
+    this.message = "FreeBSD : " + freeBSD.getState();
+    g.drawString(message, 20, 180);
+  }
+}
+```
+
+### Creating Dropdowns with Choices and Changing the String
+
+```java
+// Import this to perform event handling
+import java.awt.event.*;
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code="MyApplet" width=300 height=200></applet>*/
+
+// Make sure to implement ItemListener
+public class MyApplet extends Applet implements ItemListener {
+  // Message to Print
+  String message = "";
+  // Choices
+  Choice os, browser;
+
+  public void init() {
+    os = new Choice();
+    browser = new Choice();
+
+    // Add items to OS Choice list
+    os.add("macOS 12");
+    os.add("Windows 11");
+    os.add("Arch Linux");
+    os.add("FreeBSD");
+
+    // Add items to Browser Choice list
+    browser.add("Firefox");
+    browser.add("Chrome");
+    browser.add("Edge");
+    browser.add("Safari");
+
+    // Add both the lists to the window
+    add(os);
+    add(browser);
+
+    os.addItemListener(this);
+    browser.addItemListener(this);
+  }
+
+  // repaint the screen when checkbox state changes
+  public void itemStateChanged(ItemEvent evt) {
+    repaint();
+  }
+
+  // Draw the string on repaint
+  public void paint(Graphics g) {
+    this.message = "Current OS : " + os.getSelectedItem();
+    g.drawString(this.message, 20, 100);
+    this.message = "Current Browser : " + browser.getSelectedItem();
+    g.drawString(this.message, 20, 120);
+  }
+}
+```
+
+### Using labels
+
+```java
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code="MyApplet" width=300 height=200></applet>*/
+
+// Make sure to implement ItemListener
+public class MyApplet extends Applet {
+  public void init() {
+    Label one = new Label("One");
+    Label two = new Label("Two");
+    Label three = new Label("Three");
+
+    add(one);
+    add(two);
+    add(three);
+  }
+
+}
+```
+
+### Mouse Press Events
+
+```java
+// Import this to perform event handling
+import java.awt.event.*;
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code="MyApplet" width=300 height=200></applet>*/
+
+// Make sure to implement ItemListener
+public class MyApplet extends Applet implements MouseListener, MouseMotionListener {
+  String message = "";
+
+  public void init() {
+    addMouseListener(this);
+    addMouseMotionListener(this);
+  }
+
+  public void mouseClicked(MouseEvent evt) {
+    this.message = "Mouse Clicked";
+    repaint();
+  }
+  public void mouseEntered(MouseEvent evt) {
+    this.message = "Mouse Entered";
+    repaint();
+  }
+  public void mouseExited(MouseEvent evt) {
+    this.message = "Mouse Exited";
+    repaint();
+  }
+  public void mousePressed(MouseEvent evt) {
+    this.message = "Mouse Pressed Down";
+    repaint();
+  }
+  public void mouseReleased(MouseEvent evt) {
+    this.message = "Mouse Button Released";
+    repaint();
+  }
+  public void mouseDragged(MouseEvent evt) {
+    this.message = "Mouse is being dragged";
+    showStatus("Dragging X: " + evt.getX() + " Y: " + evt.getY());
+    repaint();
+  }
+  public void mouseMoved(MouseEvent evt) {
+    this.message = "Mouse is being moved";
+    showStatus("Moving X: " + evt.getX() + " Y: " + evt.getY());
+    repaint();
+  }
+  public void paint(Graphics g) {
+    g.drawString(this.message, 20, 20);
+  }
+}
+```
+
+### Key Press Events
+
+```java
+// Import this to perform event handling
+import java.awt.event.*;
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code="MyApplet" width=300 height=200></applet>*/
+
+// Make sure to implement ItemListener
+public class MyApplet extends Applet implements KeyListener {
+  String message = "";
+
+  public void init() {
+    addKeyListener(this);
+    requestFocus();
+  }
+
+  public void keyPressed(KeyEvent evt) {
+    showStatus("Key Pressed Down");
+  }
+
+  public void keyReleased(KeyEvent evt) {
+    showStatus("Key Released");
+  }
+
+  public void keyTyped(KeyEvent evt) {
+    this.message = evt.getKeyChar() +  " Key Pressed";
+    repaint();
+  }
+
+  public void paint(Graphics g) {
+    g.drawString(this.message, 20, 20);
+  }
+
+}
+```
+
+### Text inputs
+
+```java
+// Import this to perform event handling
+import java.awt.event.*;
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code="MyApplet" width=400 height=200></applet>*/
+
+// Make sure to implement ItemListener
+public class MyApplet extends Applet implements ActionListener {
+  String message = "";
+  Label labelName, labelPass;
+  TextField name, pass;
+
+  public void init() {
+    this.labelName = new Label("Name : ", Label.RIGHT);
+    this.labelPass = new Label("Password : ", Label.RIGHT);
+
+    name = new TextField(10);
+    pass = new TextField(10);
+    pass.setEchoChar('*');
+
+    add(labelName);
+    add(name);
+    add(labelPass);
+    add(pass);
+
+    name.addActionListener(this);
+    pass.addActionListener(this);
+  }
+
+  public void actionPerformed(ActionEvent evt) {
+    repaint();
+  }
+
+  public void paint(Graphics g) {
+    g.drawString("Name : " + name.getText(), 20, 100);
+    g.drawString("Selected Text in Name : " + name.getSelectedText(), 20, 120);
+    g.drawString("Password : " + pass.getText(), 20, 140);
+  }
+}
+```
+
+## AWT Programming
 
 ## Swing Components
