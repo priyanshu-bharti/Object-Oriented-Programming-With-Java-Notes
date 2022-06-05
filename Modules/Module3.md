@@ -1,6 +1,6 @@
 # Object Oriented Programming With Java (ITA5004) - Notes
 
-## Module - 3
+## Module - 3 : Exception Handling and Multithreading
 
 - [x] ~~Exception Handling~~
 - [x] ~~Built in exceptions~~

@@ -1,5 +1,5 @@
 # Object Oriented Programming With Java (ITA5004) - Notes
-# Module - 1
+# Module - 1 : Introduction to Object Oriented Programming
 - [x] ~~Classes and Objects~~
 - [x] ~~Overloading Methods~~
 - [x] ~~Passing and Receiving Objects~~

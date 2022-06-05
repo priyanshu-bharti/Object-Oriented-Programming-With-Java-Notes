@@ -1,11 +1,11 @@
 # Object Oriented Programming With Java (ITA5004) - Notes
 
-## Module - 4
+## Module - 4 : Java GUI Programming
 
-- [ ] Applet Programming
-- [ ] AWT Programming
-- [ ] Event handling
-- [ ] Swing Components
+- [x] ~~Applet Programming~~
+- [x] ~~AWT Programming~~
+- [x] ~~Event handling~~
+- [x] ~~Swing Components~~
 
 ## Applet Programming
 

@@ -1,6 +1,6 @@
 # Object Oriented Programming With Java (ITA5004) - Notes
 
-## Module - 2
+## Module - 2 : More Object Oriented Programming
 
 - [x] ~~Inheritance~~
 - [x] ~~Types of inheritance~~
