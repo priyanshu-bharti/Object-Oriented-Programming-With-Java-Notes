@@ -292,8 +292,7 @@ import java.awt.*;
 import java.applet.*;
 
 /*<applet code="MyApplet" width=200 height=200></applet>*/
-
-// Make sure to implement ActionListener
+f// Make sure to implement ActionListener
 public class MyApplet extends Applet implements ActionListener {
   // Message to Print
   String message = "";
@@ -676,4 +675,170 @@ public class MyApplet extends Applet implements ActionListener {
 
 ## AWT Programming
 
+### Basic empty frame program
+
+```java
+// Import these classes
+import java.awt.*;
+import java.awt.event.*;
+
+// Create our frame class
+import java.awt.*;
+import java.awt.event.*;
+
+public class FrameEX {
+  // Create a new frame object with a title for the titlebar
+  Frame frame = new Frame("This is a frame");
+
+  // Create a new label for displaying hello world text
+  Label text = new Label("Hello world");
+
+  // as soon as the constructor is called
+  // it would define the dimensions of the frame and make it visible.
+  FrameEX() {
+    frame.show();
+    frame.setLayout(null);
+    frame.setSize(300, 200);
+
+    // Add the closing mechanism to the window
+    frame.addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        frame.dispose();
+      }
+    });
+
+    // Add the label and set position to (20, 20)
+    // Also give it a width=100px and height=32px
+    frame.add(text).setBounds(20, 20, 100, 32);
+  }
+
+  public static void main(String[] args) {
+    new FrameEX();
+  }
+}
+```
+
+### Changing the label text and button background color on click
+
+```java
+import java.awt.*;
+import java.awt.event.*;
+
+public class FrameEX {
+  // Create a new frame object with a title for the titlebar
+  Frame frame = new Frame("Action Listener demo");
+
+  // Create components
+  Label text = new Label("Enter text and press the button to see the text change");
+  TextField textfield = new TextField();
+  Button btn = new Button("Change text");
+
+  // make the frame
+  FrameEX() {
+    frame.show(); // display the frame
+    frame.setLayout(null); // give it no layouts
+    frame.setSize(500, 300); // set the window size
+
+    // Add the closing mechanism to the window
+    frame.addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        frame.dispose(); // close the window
+      }
+    });
+
+    // Add the components
+    frame.add(text).setBounds(20, 30, 400, 32);
+    frame.add(textfield).setBounds(20, 60, 400, 32);
+    frame.add(btn).setBounds(20, 90, 100, 32);
+
+    btn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        String input = textfield.getText();
+        text.setText(input);
+        btn.setBackground(Color.CYAN);
+      }
+    });
+  }
+
+  public static void main(String[] args) {
+    new FrameEX();
+  }
+}
+
+```
+
 ## Swing Components
+
+### Basic Hello World Program in Java
+
+```java
+import javax.swing.*;
+
+public class SwingApp extends JFrame {
+  JLabel label = new JLabel("Hello World");
+
+  SwingApp() {
+    // Initialize the app with the following properties
+    setSize(275, 100);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+
+    // Add the label to the app
+    add(label);
+  }
+
+  public static void main(String[] args) {
+    new SwingApp();
+  }
+}
+```
+
+### Event Listeners using Swing
+
+```java
+// It mostly uses the same classes as awt for events.
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SwingApp extends JFrame {
+  JLabel label = new JLabel("Hello World");
+  JButton btn1 = new JButton("Alpha");
+  JButton btn2 = new JButton("Beta");
+
+  SwingApp() {
+    // Initialize the app with the following properties
+    setSize(300, 200);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+    setLayout(null);
+
+    // Set the positioning of the components
+    label.setBounds(20, 20, 150, 30);
+    btn1.setBounds(20, 60, 100, 30);
+    btn2.setBounds(150, 60, 100, 30);
+
+    // Add the components to the canvas
+    add(label);
+    add(btn1);
+    add(btn2);
+
+    // Add event listeners to the buttons
+    btn1.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        label.setText("Alpha Pressed");
+      }
+    });
+    btn2.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        label.setText("Beta Pressed");
+      }
+    });
+  }
+
+  public static void main(String[] args) {
+    new SwingApp();
+  }
+}
+```
+
+## Java Database Connectivity
