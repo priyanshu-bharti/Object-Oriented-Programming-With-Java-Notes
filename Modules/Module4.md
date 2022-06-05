@@ -840,5 +840,3 @@ public class SwingApp extends JFrame {
   }
 }
 ```
-
-## Java Database Connectivity
