@@ -840,3 +840,232 @@ public class SwingApp extends JFrame {
   }
 }
 ```
+
+## Network programming
+
+- Java contains `java.net` package that allows to make network requests
+- Network contains the following things:
+  1. **Node** : Any device on the network.
+  2. **Host** : Any Computer on the network.
+  3. **Address** : Computer readable name of the host.
+  4. **Hostname** : Human readable name of the host.
+- In a network, packets or datagrams are transported.
+- These packets are small bundles of information sent from a source to a destination.
+- The transportation of the packets is done using a protocol.
+- Protocol is the set of rules governing the transmission of information.
+- Commonly used protocols are: TCP, UDP, IP, etc.
+
+### Various kinds of networks
+
+1. **Internet** : The enormous network based using IP.
+1. **Intranet** : Corporate, Lan based IP network
+1. **Extranet** : Accessing the Intranet over the Internet.
+
+### Socket
+
+- Socket is an endpoint in a network.
+- Allows 2 way communication.
+- Allows a computer to serve many clients at once, and different kinds of information.
+- This mechanism uses ports which is the number for any socket on the system.
+- Server listens to a port until the client connects to it and makes a request.
+- Multiple clients can connect to the same port but the session is kept unique.
+- For handling multiple requests from different clients, multithreading must be done.
+
+### Address
+
+- Each device on the internet has an address.
+- This address can uniquely identify a device.
+- Commonly used addressing formats are IPv4 and IPv6.
+- IPv4 is a classful, address which has a dotted notation.
+- Each dots separates an octet which represents number from 0 to 255.
+
+### Connecting a client to the server using sockets
+
+**Client Code**
+
+```java
+// Import the packages
+import java.net.*;
+import java.io.*;
+
+public class client {
+  // Make sure to declare the IOException
+  public static void main(String[] args) throws IOException {
+    // Create a new socket
+    Socket socket = new Socket("localhost", 4999);
+
+    // Close the socket after use.
+    socket.close();
+  }
+}
+```
+
+**Server Code**
+
+```java
+// Import packages
+import java.net.*;
+import java.io.*;
+
+public class server {
+  // Make sure to declare the IOException
+  public static void main(String[] args) throws IOException {
+
+    // Create a new server socket
+    ServerSocket serverSocket = new ServerSocket(4999);
+    // Accept request from the client
+    serverSocket.accept();
+
+    // Display information
+    System.out.println("Client Connected");
+
+    // Close the connection
+    serverSocket.close();
+  }
+}
+```
+
+### One Way Communication from client to the server
+
+**Client Code**
+
+```java
+// Import the packages
+import java.net.*;
+import java.io.*;
+
+public class client {
+  // Make sure to declare the IOException
+  public static void main(String[] args) throws IOException {
+    // Create a new socket
+    Socket socket = new Socket("localhost", 4999);
+
+    /* --- Send message to the Server --- */
+    // Create an output stream
+    PrintWriter writer = new PrintWriter(socket.getOutputStream());
+    // Print message
+    writer.println("Hello Server!");
+    // Flush the stream
+    writer.flush();
+
+    // Close the socket after use.
+    socket.close();
+  }
+}
+```
+
+**Server Code**
+
+```java
+// Import packages
+import java.net.*;
+import java.io.*;
+
+public class server {
+  // Make sure to declare the IOException
+  public static void main(String[] args) throws IOException {
+
+    // Create a new server socket
+    ServerSocket serverSocket = new ServerSocket(4999);
+    // Accept request from the client
+    Socket socket = serverSocket.accept();
+    // Display information
+    System.out.println("Client Connected");
+
+    /* --- Get message from the client --- */
+    // Get the input as a stream from the client.
+    InputStreamReader input = new InputStreamReader(socket.getInputStream());
+    // Create a buffer for the data obtained from the reader.
+    BufferedReader buffer = new BufferedReader(input);
+    // Read the contents from the buffer.
+    String str = buffer.readLine();
+    // Print the message from the client
+    System.out.println(str);
+
+    // Close the connection
+    serverSocket.close();
+  }
+}
+```
+
+### Two way communication between a client and a server
+
+**Client Code**
+
+```java
+// Import the packages
+import java.net.*;
+import java.io.*;
+
+public class client {
+  // Make sure to declare the IOException
+  public static void main(String[] args) throws IOException {
+    // Create a new socket
+    Socket socket = new Socket("localhost", 4999);
+
+    /* --- Send message to the Server --- */
+    // Create an output stream
+    PrintWriter writer = new PrintWriter(socket.getOutputStream());
+    // Print message
+    writer.println("Hello Server!");
+    // Flush the stream
+    writer.flush();
+
+    /* --- Get the response from the Server --- */
+    // Get the input as a stream from the client.
+    InputStreamReader input = new InputStreamReader(socket.getInputStream());
+    // Create a buffer for the data obtained from the reader.
+    BufferedReader buffer = new BufferedReader(input);
+    // Read the contents from the buffer.
+    String str = buffer.readLine();
+    // Print the message from the client
+    System.out.println(str);
+
+    // Close the socket after use.
+    socket.close();
+  }
+}
+```
+
+**Server Code**
+
+```java
+// Import packages
+import java.net.*;
+import java.io.*;
+
+public class server {
+  // Make sure to declare the IOException
+  public static void main(String[] args) throws IOException {
+
+    // Create a new server socket
+    ServerSocket serverSocket = new ServerSocket(4999);
+    // Accept request from the client
+    Socket socket = serverSocket.accept();
+    // Display information
+    System.out.println("Client Connected");
+
+    /* --- Get message from the client --- */
+    // Get the input as a stream from the client.
+    InputStreamReader input = new InputStreamReader(socket.getInputStream());
+    // Create a buffer for the data obtained from the reader.
+    BufferedReader buffer = new BufferedReader(input);
+    // Read the contents from the buffer.
+    String str = buffer.readLine();
+    // Print the message from the client
+    System.out.println(str);
+
+    /* --- Send message to the client --- */
+    // Create an output stream
+    PrintWriter writer = new PrintWriter(socket.getOutputStream());
+    // Print message
+    writer.println("Acknowledgement from the Server...");
+    // Flush the stream
+    writer.flush();
+
+    // Close the connection
+    serverSocket.close();
+  }
+}
+```
+
