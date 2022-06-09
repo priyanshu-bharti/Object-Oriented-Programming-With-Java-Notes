@@ -124,6 +124,127 @@ public class App {
 
 ```
 
-### Java Database Connectivity
+## Java Database Connectivity
 
-<!-- TODO : TBD -->
+- JDBC is a Java API to connect and execute the query with the database.
+- JDBC API uses JDBC drivers to connect with the database.
+- We can use JDBC API to access data stored in relational databases.
+- JDBC API enables us to insert, and query data from the database.
+- It can make use of the 4 possible drivers :
+  - **JDBC-ODBC bridge driver**
+
+    - Uses ODBC driver to connect to the database.
+    - Converts JDBC method calls into the ODBC function calls.
+    - Easy to setup and use.
+    - Less Performant
+
+  - **Native-API driver (partially java driver)**
+
+    - Uses the client-side libraries of the database.
+    - Converts JDBC method calls into native calls of the database API.
+    - It is not written entirely in java.
+    - Slightly more performant than JDBC-ODBC Driver.
+    - Requires installation on each client system.
+
+  - **Network Protocol driver (fully java driver)** :
+
+    - Uses middleware that converts JDBC calls into vendor-specific database protocol.
+    - It is fully written in java.
+
+  - **Thin driver (fully java driver)** :
+
+    - The thin driver converts JDBC calls directly into the vendor-specific database protocol.
+    - That is why it is known as thin driver.
+    - It is fully written in Java language.
+
+### API
+
+- Stands for Application Programming Interface.
+- Usually used to connect two different technologies together using a bridge.
+- An API can be created for applications, libraries, operating systems, etc.
+- Common applications involving APIs generally separate the frontend from the backend.
+
+### Simple Select Query
+
+```java
+import java.sql.*;
+import java.util.*;
+
+public class App {
+  public static void main(String[] args) {
+    // Table Details
+    String tableName = "Test";
+
+    // Load the JDBC Driver
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+    // Create Connection
+    Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "username", "password");
+
+    // Create Statement Object
+    Statement stmt = conn.createStatement();
+
+    // Execute statement
+    ResultSet res = stmt.executeQuery("Select * from " + tableName);
+
+    // Get each row until there are no more rows left
+    while(res.next()) {
+      System.out.println(res.getString(0)); // Gets the first column of the row.
+      System.out.println(res.getString(1)); // Gets the second column of the row.
+    }
+
+    // Close the connection
+    res.close();
+    stmt.close();
+    conn.close();
+  }
+}
+```
+
+### Simple Insert Query
+
+```java
+import java.sql.*;
+import java.util.*;
+
+public class App {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    // Table Details
+    String tableName = "Test";
+
+    // Get the data from the user
+    String name = sc.nextLine();
+    String age = sc.nextLine();
+    String occupation = sc.nextLine();
+
+    // Load the JDBC Driver
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+    // Create Connection
+    Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "username", "password");
+
+    // Create Statement Object
+    Statement stmt = conn.createStatement();
+
+    // Execute statement
+    ResultSet res = stmt.executeQuery("INSERT INTO " + tableName + " (name, age, occupation) VALUES (" + name + "," + age + "," + occupation + ";");
+
+    // Select the inserted data
+    ResultSet res = stmt.executeQuery("Select * from " + tableName);
+
+    // Get each row until there are no more rows left
+    while(res.next()) {
+      System.out.println(res.getString(0)); // Gets the name
+      System.out.println(res.getString(1)); // Gets the age
+      System.out.println(res.getString(2)); // Gets the occupation
+    }
+
+    // Close the connection
+    res.close();
+    stmt.close();
+    conn.close();
+  }
+}
+```
