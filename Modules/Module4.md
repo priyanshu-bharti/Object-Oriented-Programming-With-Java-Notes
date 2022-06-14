@@ -66,7 +66,7 @@ public class MyApplet extends Applet {
 ## Applet Program Architecture
 
 - Applet doesn't have `main()` method instead it contains `paint()` method.
-- Execution begin when the name of the calss is passed to the Applet tag in the HTML file.
+- Execution begin when the name of the class is passed to the Applet tag in the HTML file.
 - To create an applet include the following tags in the HTML file or simply place it in the java file after import statements as comments using `/* ... */`.
   ```html
   <applet code="AppletClassName" width="300" height="300"></applet>
