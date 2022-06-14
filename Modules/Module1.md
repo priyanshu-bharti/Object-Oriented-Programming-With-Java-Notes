@@ -7,7 +7,7 @@
 - [x] ~~Static and Final Keywords~~
 - [x] ~~String handling~~
 
-## Classes And Objects
+## Interfaces
 * Mechanism to achieve abstraction
 * Contains **only abstract methods not their body**
 * Used to achieve abstraction and multiple inheritance
