@@ -186,7 +186,7 @@ package nameOfPackage;
 - Then compile the package
 
 ```
-javac nameOfPackage.java && javac –d . nameOfPackage.java
+javac –d . nameOfPackage.java
 ```
 
 - Importing and Using a Package
